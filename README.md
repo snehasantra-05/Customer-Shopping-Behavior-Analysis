@@ -18,15 +18,13 @@ Raw Dataset
 → Cleaned Dataset
 → SQL Analysis
 → Power BI Dashboard
-→ Final Project Report
+→ Final Project Report & Presentation
 
 ## Tools & Technologies
 
 - Python
 - Pandas
 - NumPy
-- Matplotlib
-- Seaborn
 - MySQL
 - Power BI
 - Jupyter Notebook
@@ -50,6 +48,6 @@ Raw Dataset
 - [x] MySQL Database Setup
 - [x] Data Import
 - [x] SQL Data Quality Checks
-- [ ] SQL Analysis
+- [x] SQL Analysis
 - [ ] Power BI Dashboard
 - [ ] Project Report
