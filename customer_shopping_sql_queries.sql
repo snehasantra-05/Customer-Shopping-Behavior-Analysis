@@ -81,17 +81,55 @@ select item_purchased, count(*) AS total_count, SUM(CASE WHEN discount_applied =
 
 select 
     CASE 
-        WHEN previous_purchases = 0 THEN 'New' 
-        WHEN previous_purchases BETWEEN 1 AND 5 THEN 'Returning' 
+        WHEN previous_purchases = 1 THEN 'New' 
+        WHEN previous_purchases BETWEEN 2 AND 10 THEN 'Returning' 
         ELSE 'Loyal' 
     END AS customer_segment, 
-    COUNT(*) AS segment_count
+COUNT(*) AS segment_count
 from customer_shopping group by customer_segment;
 
 --Q8. What are the top 3 most purchased products within each category?
 
+with item_counts AS (
+    select category, item_purchased, count(customer_id) as total_orders, 
+    ROW_NUMBER() OVER (PARTITION BY category ORDER BY count(customer_id) DESC) AS item_rank
+    from customer_shopping group by category, item_purchased
+)
+select item_rank, category, item_purchased, total_orders from item_counts where item_rank <= 3;
+
 --Q9. Are customers who are repeat buyers (more than 5 previous purchases) also likely to subscribe?
+
+select subscription_status, COUNT(*) AS total_customers from customer_shopping where previous_purchases > 5 group by subscription_status;
 
 --Q10. What is the revenue contribution of each age group?
 
+select age_group, SUM(purchase_amount) AS total_revenue from customer_shopping group by age_group order by total_revenue desc;
 
+-- Q11. Which product categories generate the highest total revenue?
+
+select category, SUM(purchase_amount) AS total_revenue from customer_shopping group by category order by total_revenue desc;
+
+-- Q12. Which season has the highest total revenue and average purchase amount?
+
+select season, SUM(purchase_amount) AS total_revenue, AVG(purchase_amount) AS avg_purchase_amount from customer_shopping group by season order by total_revenue desc;
+
+-- Q13. What percentage of customers use each payment method?
+
+select payment_method, COUNT(*) AS total_customers, (COUNT(*) / (SELECT COUNT(*) FROM customer_shopping)) * 100 AS percentage_of_customers from customer_shopping group by payment_method order by percentage_of_customers desc;
+
+-- Q14. Which locations have the highest number of customers and highest total revenue?
+
+select location, COUNT(*) AS total_customers, SUM(purchase_amount) AS total_revenue from customer_shopping group by location order by total_customers desc, total_revenue desc;
+
+-- Q15. Does applying a discount affect the average purchase amount?
+
+select discount_applied, COUNT(*) AS total_purchases, AVG(purchase_amount) AS avg_purchase_amount from customer_shopping group by discount_applied order by avg_purchase_amount desc;
+
+-- Q16. Rank products by total revenue within each category.
+
+with revenue_rank AS (
+    select category, item_purchased, SUM(purchase_amount) AS total_revenue,
+    RANK() OVER (PARTITION BY category ORDER BY SUM(purchase_amount) DESC) AS revenue_rank
+    from customer_shopping group by category, item_purchased
+)
+select * from revenue_rank;
