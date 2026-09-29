@@ -39,7 +39,8 @@ Raw Dataset
 | `customer_shopping_sql_queries.sql` | MySQL database setup and SQL analysis |
 | `Business_Problem_Document.pdf` | Business problem definition |
 | `customer_shopping_behavior_dashboard.pbix` | Interactive Power BI dashboard |
-| `Customer_Shopping_Behavior_Project_Report.pdf` | Detailed project report |
+| `customer_shopping_behavior_Project_Report.pdf` | Detailed project report |
+
 
 ## Current Progress
 
