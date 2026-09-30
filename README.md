@@ -18,7 +18,7 @@ Raw Dataset
 → Cleaned Dataset
 → SQL Analysis
 → Power BI Dashboard
-→ Final Project Report
+→ Final Project Report & Presentation
 
 ## Tools & Technologies
 
@@ -39,7 +39,8 @@ Raw Dataset
 | `customer_shopping_sql_queries.sql` | MySQL database setup and SQL analysis |
 | `Business_Problem_Document.pdf` | Business problem definition |
 | `customer_shopping_behavior_dashboard.pbix` | Interactive Power BI dashboard |
-| `customer_shopping_behavior_Project_Report.pdf` | Detailed project report |
+| `Customer_Shopping_Behavior_Project_Report.pdf` | Detailed project report |
+| `Customer_Shopping_Behaviour_Presentation.pptx` | Project Precentation |
 
 
 ## Current Progress
@@ -54,3 +55,4 @@ Raw Dataset
 - [x] SQL Analysis
 - [x] Power BI Dashboard
 - [x] Project Report
+- [x] Project Presentation
